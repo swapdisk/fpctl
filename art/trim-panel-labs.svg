@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="8.5in"
+   height="11in"
+   viewBox="0 -78 215.9 279.4"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="trim-panel-labs.svg"
+   inkscape:version="1.4.2 (ebf0e940d0, 2025-05-08)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="212.48559"
+     inkscape:cy="248.54803"
+     inkscape:window-width="2560"
+     inkscape:window-height="1025"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <title
+     id="title1">OpenSCAD Model</title>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect1-5"
+     width="16.99999"
+     height="14.99999"
+     x="11.000005"
+     y="-56.999996" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="19.950644"
+     y="-50.460251"
+     id="text1-1-6"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan1-1"
+       x="19.950644"
+       y="-50.460251"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <metadata
+     id="metadata15">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>OpenSCAD Model</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="19.950644"
+     y="-43.757305"
+     id="text3"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan2"
+       x="19.950644"
+       y="-43.757305"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g6"
+     transform="translate(-16.985374,11.966326)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle3"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle4"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect4"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect23"
+     width="16.99999"
+     height="14.99999"
+     x="41.000004"
+     y="-56.999996" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.497654"
+     y="-50.460251"
+     id="text23"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan23"
+       x="50.497654"
+       y="-50.460251"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.497654"
+     y="-43.757305"
+     id="text24"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan24"
+       x="50.497654"
+       y="-43.757305"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g25"
+     transform="translate(13.014626,11.966326)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle24"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle25"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect25"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect26"
+     width="16.99999"
+     height="14.99999"
+     x="71.000008"
+     y="-56.999996" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.044662"
+     y="-50.460251"
+     id="text26"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan26"
+       x="81.044662"
+       y="-50.460251"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.044662"
+     y="-43.757305"
+     id="text27"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan27"
+       x="81.044662"
+       y="-43.757305"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g28"
+     transform="translate(43.014627,11.966326)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle27"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle28"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect28"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect37"
+     width="16.99999"
+     height="14.99999"
+     x="11.000005"
+     y="-16.999994" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="19.950644"
+     y="-11.176538"
+     id="text37"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan37"
+       x="19.950644"
+       y="-11.176538"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="19.950644"
+     y="-4.4735913"
+     id="text38"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan38"
+       x="19.950644"
+       y="-4.4735913"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g39"
+     transform="translate(-16.985374,51.966327)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle38"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle39"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect39"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect40"
+     width="16.99999"
+     height="14.99999"
+     x="41.000004"
+     y="-16.999994" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.497654"
+     y="-11.176538"
+     id="text40"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan40"
+       x="50.497654"
+       y="-11.176538"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.497654"
+     y="-4.4735913"
+     id="text41"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan41"
+       x="50.497654"
+       y="-4.4735913"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g42"
+     transform="translate(13.014626,51.966327)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle41"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle42"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect42"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+  <rect
+     style="fill:#4f4f63;fill-opacity:1;stroke:#4f4f63;stroke-width:2.00001;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     id="rect43"
+     width="16.99999"
+     height="14.99999"
+     x="71.000008"
+     y="-16.999994" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.044662"
+     y="-11.176538"
+     id="text43"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan43"
+       x="81.044662"
+       y="-11.176538"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">TRIM</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.23333px;font-family:'Routed Gothic';-inkscape-font-specification:'Routed Gothic';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.044662"
+     y="-4.4735913"
+     id="text44"
+     transform="scale(0.98209281,1.0182337)"><tspan
+       sodipodi:role="line"
+       id="tspan44"
+       x="81.044662"
+       y="-4.4735913"
+       style="font-size:4.23333px;fill:#ffffbf;fill-opacity:1">ZOOM</tspan></text>
+  <g
+     id="g45"
+     transform="translate(43.014627,51.966327)">
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle44"
+       cx="38.158627"
+       cy="56.907322"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <circle
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="circle45"
+       cx="31.877125"
+       cy="67.787201"
+       r="0.20387453"
+       transform="rotate(-120)" />
+    <rect
+       style="font-variation-settings:normal;opacity:1;vector-effect:none;fill:#ffffbf;fill-opacity:1;stroke:none;stroke-width:1.99999;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none"
+       id="rect45"
+       width="12.562566"
+       height="0.40799999"
+       x="30.203999"
+       y="-61.704002" />
+  </g>
+</svg>
