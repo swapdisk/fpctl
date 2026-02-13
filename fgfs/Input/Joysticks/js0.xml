@@ -1,0 +1,516 @@
+<?xml version="1.0"?>
+
+<!--
+
+My joystick input definition. Yours may differ.
+
+Drop in the ~/.fgfs/Input/Joysticks/ directory.
+
+Axes:
+
+   0: Ailerons (roll)
+   1: Elevator (pitch)
+   2: Rudder (yaw)
+   3: View direction
+   4: View elevation
+   5: Throttle (thrust)
+
+Buttons:
+
+   0: Gear (down/up)
+   1: ALT dial mode (100/1000)
+  12: A/THR
+  13: LOC
+  14: SPD/MACH
+  15: AP1
+  16: AP2
+  17: HDG/TRK
+  18: EXPED
+  19: APPR
+  20: METRIC
+  21: MASTER WARN
+  22: MASTER CAUT
+  23: TO CONFIG
+  24: SPD pull
+  25: HDG pull
+  26: ALT pull
+  27: VS pull
+  28: SPD push
+  29: HDG push
+  30: ALT push
+  31: VS push
+
+-->
+
+
+<PropertyList>
+  <name type="string">Espressif Systems ESP32_S3_USB_OTG</name>
+  <nasal>
+    <script><![CDATA[
+    print("joystick v34");
+    var timerViewDir = maketimer(0.05, func() {
+      var js3 = getprop("input/joysticks/js[0]/axis[3]/binding/setting");
+      if (js3 != nil and js3 != 0) {
+        view.panViewDir(-js3*2);
+      }
+    });
+    var timerViewPitch = maketimer(0.05, func() {
+      var js4 = getprop("input/joysticks/js[0]/axis[4]/binding/setting");
+      if (js4 != nil and js4 != 0) {
+        view.panViewPitch(-js4*2);
+      }
+    });
+    timerViewDir.start();
+    timerViewPitch.start();
+    ]]></script>
+  </nasal>
+  <axis n="0">
+    <desc>Aileron</desc>
+    <direction>right</direction>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/aileron</property>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <axis n="1">
+    <desc>Elevator</desc>
+    <direction>down/forward</direction>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/elevator</property>
+      <factor type="double">-1</factor>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <axis n="2">
+    <desc>Rudder</desc>
+    <direction>right</direction>
+    <binding>
+      <command>property-scale</command>
+      <property>/controls/flight/rudder</property>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <axis n="3">
+    <desc>View Direction</desc>
+    <direction>left</direction>
+    <binding>
+      <command>nasal</command>
+      <script>true;</script>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <axis n="4">
+    <desc>View Elevation</desc>
+    <direction>upward</direction>
+    <binding>
+      <command>nasal</command>
+      <script>true;</script>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <axis n="5">
+    <desc>Throttle</desc>
+    <direction>forward</direction>
+    <binding>
+      <command>nasal</command>
+      <script><![CDATA[
+      var js5 = getprop("input/joysticks/js[0]/axis[5]/binding/setting");
+      if (js5 != nil and js5 <= 0 and js5 >= -0.21) {
+        setprop("input/joysticks/js[0]/axis[5]/binding/setting", -0.21);
+      }
+      controls.throttleAxis();
+        ]]></script>
+    </binding>
+    <dead-band type="double">0</dead-band>
+  </axis>
+  <button n="0">
+    <desc>Landing Gear</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>controls.gearDown(-1)</script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>nasal</command>
+        <script>controls.gearDown(1)</script>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="1">
+    <desc>ALT dial mode</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-assign</command>
+      <property>it-autoflight/config/altitude-dial-mode</property>
+      <value>1</value>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>it-autoflight/config/altitude-dial-mode</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="12">
+    <desc>A/THR button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.ATHR();</script>
+    </binding>
+  </button>
+  <button n="13">
+    <desc>LOC button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.LOCButton();</script>
+    </binding>
+  </button>
+  <button n="14">
+    <desc>SPD/MACH mode</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.IASMach();</script>
+    </binding>
+  </button>
+  <button n="15">
+    <desc>AP1 button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.AP1();</script>
+    </binding>
+  </button>
+  <button n="16">
+    <desc>AP2 button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.AP2();</script>
+    </binding>
+  </button>
+  <button n="17">
+    <desc>TRK/FPA button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.TRKFPA();</script>
+    </binding>
+  </button>
+  <button n="18">
+    <desc>EXPED button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>print("EXPED function not yet implemented!");</script>
+    </binding>
+  </button>
+  <button n="19">
+    <desc>APPR button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.APPRButton();</script>
+    </binding>
+  </button>
+  <button n="20">
+    <desc>METRIC ALT button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>fcu.FCUController.MetricAlt();</script>
+    </binding>
+  </button>
+  <button n="21">
+    <desc>MASTER WARN button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>property-assign</command>
+            <property>ECAM/warnings/master-warning-light</property>
+            <value>0</value>
+    </binding>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>property-assign</command>
+            <property>sim/sound/warnings/crc</property>
+            <value>0</value>
+    </binding>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>nasal</command>
+            <script>
+                    if (getprop("sim/sound/warnings/cchord")) {
+                            setprop("sim/sound/warnings/cchord-inhibit", 1);
+                    }
+
+                    if (getprop("it-autoflight/output/ap-warning") == 1) {
+                            setprop("it-autoflight/output/ap-warning", 0);
+                    }
+                    if (getprop("it-autoflight/sound/apoffsound") == 1 or getprop("it-autoflight/sound/apoffsound2") == 
+1) {
+                            setprop("it-autoflight/sound/apoffsound", 0);
+                            setprop("it-autoflight/sound/apoffsound2", 0);
+                    }
+            </script>
+    </binding>
+    <binding>
+            <command>property-assign</command>
+            <property>controls/cockpit/master-warn-translate</property>
+            <value>0.002</value>
+    </binding>
+    <mod-up>
+            <binding>
+                    <command>property-assign</command>
+                    <property>controls/cockpit/master-warn-translate</property>
+                    <value>0.0</value>
+            </binding>
+    </mod-up>
+  </button>
+  <button n="22">
+    <desc>MASTER CAUT button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>property-assign</command>
+            <property>ECAM/warnings/master-caution-light</property>
+            <value>0</value>
+    </binding>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>nasal</command>
+            <script>
+                    if (getprop("it-autoflight/output/athr-warning") == 1) {
+                            setprop("it-autoflight/output/athr-warning", 0);
+                    }
+            </script>
+    </binding>
+    <binding>
+            <command>nasal</command>
+            <script>setprop("sim/sound/btn1", 1);</script>
+    </binding>
+    <binding>
+            <command>property-assign</command>
+            <property>controls/cockpit/master-caut-translate</property>
+            <value>0.002</value>
+    </binding>
+    <mod-up>
+            <binding>
+                    <command>property-assign</command>
+                    <property>controls/cockpit/master-caut-translate</property>
+                    <value>0.0</value>
+            </binding>
+    </mod-up>
+  </button>
+  <button n="23">
+    <desc>T.O. CONFIG button</desc>
+    <repeatable>false</repeatable>
+    <binding>
+            <condition>
+                    <greater-than-equals>
+                            <property>systems/electrical/bus/dc-ess</property>
+                            <value>25</value>
+                    </greater-than-equals>
+            </condition>
+            <command>property-assign</command>
+            <property>ECAM/to-config-test</property>
+            <value>1</value>
+    </binding>
+    <binding>
+            <command>property-assign</command>
+            <property>controls/cockpit/toconfig-btn-translate</property>
+            <value>-0.002</value>
+    </binding>
+    <binding>
+            <command>nasal</command>
+            <script>libraries.pushbutton();</script>
+    </binding>
+    <mod-up>
+            <binding>
+                    <command>property-assign</command>
+                    <property>controls/cockpit/toconfig-btn-translate</property>
+                    <value>0.0</value>
+            </binding>
+            <binding>
+                    <command>property-assign</command>
+                    <property>ECAM/to-config-test</property>
+                    <value>0</value>
+            </binding>
+    </mod-up>
+  </button>
+  <button n="24">
+    <desc>SPD Pull</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.SPDPull();
+        setprop("/controls/cockpit/spd-knb-translate", 0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/spd-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="25">
+    <desc>HDG Pull</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.HDGPull();
+        setprop("/controls/cockpit/hdg-knb-translate", 0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/hdg-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="26">
+    <desc>ALT Pull</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.ALTPull();
+        setprop("/controls/cockpit/alt-knb-translate", 0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/alt-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="27">
+    <desc>VS Pull</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.VSPull();
+        setprop("/controls/cockpit/vs-knb-translate", 0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/vs-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="28">
+    <desc>SPD Push</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.SPDPush();
+        setprop("/controls/cockpit/spd-knb-translate", -0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/spd-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="29">
+    <desc>HDG Push</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.HDGPush();
+        setprop("/controls/cockpit/hdg-knb-translate", -0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/hdg-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="30">
+    <desc>ALT Push</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.ALTPush();
+        setprop("/controls/cockpit/alt-knb-translate", -0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/alt-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+  <button n="31">
+    <desc>VS Push</desc>
+    <repeatable>false</repeatable>
+    <binding>
+      <command>nasal</command>
+      <script>
+        fcu.FCUController.VSPush();
+        setprop("/controls/cockpit/vs-knb-translate", -0.002);
+      </script>
+    </binding>
+    <mod-up>
+      <binding>
+        <command>property-assign</command>
+        <property>controls/cockpit/vs-knb-translate</property>
+        <value>0</value>
+      </binding>
+    </mod-up>
+  </button>
+</PropertyList>
