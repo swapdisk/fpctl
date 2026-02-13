@@ -43,7 +43,9 @@ The ESP32 firmware is written in C++ using the Arduino framework. The main loop 
 
 ## What's Here
 
-This repo contains all the files used to make this project, but no effort has been taken to make this something anybody can recreate exactly. What I made was very much a prototype engineered piece by piece without any final design plan.
+This repo contains all the files used to make this project, but no effort has been taken to make this something anybody can recreate exactly. What I made was very much a prototype engineered piece by piece without any final design plan. Here's a look inside:
+
+![Project Guts](images/fpctl-guts.png)
 
 There is no bill of materials listing everything you need to order up on Digikey. Many of the components came out of my parts bins or were scrapped from other projects. So it's in that vein what's in this repo is offered. It's not a recipe to recreate exactly what I built, but rather a collection of code and ideas you can draw on to create your own thing.
 
