@@ -17,8 +17,6 @@ Axes:
 
 Buttons:
 
-   0: Gear (down/up)
-   1: ALT dial mode (100/1000)
   12: A/THR
   13: LOC
   14: SPD/MACH
@@ -125,36 +123,6 @@ Buttons:
     </binding>
     <dead-band type="double">0</dead-band>
   </axis>
-  <button n="0">
-    <desc>Landing Gear</desc>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>nasal</command>
-      <script>controls.gearDown(-1)</script>
-    </binding>
-    <mod-up>
-      <binding>
-        <command>nasal</command>
-        <script>controls.gearDown(1)</script>
-      </binding>
-    </mod-up>
-  </button>
-  <button n="1">
-    <desc>ALT dial mode</desc>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-assign</command>
-      <property>it-autoflight/config/altitude-dial-mode</property>
-      <value>1</value>
-    </binding>
-    <mod-up>
-      <binding>
-        <command>property-assign</command>
-        <property>it-autoflight/config/altitude-dial-mode</property>
-        <value>0</value>
-      </binding>
-    </mod-up>
-  </button>
   <button n="12">
     <desc>A/THR button</desc>
     <repeatable>false</repeatable>

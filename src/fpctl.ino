@@ -131,10 +131,6 @@ unsigned long whenPot = 0;
 int oldGear = -1;
 int oldUnits = -1;
 
-// Mapping of stateful switches to Gamepad buttons
-const int buttonGear = 0;
-const int buttonUnits = 1;
-
 // Flaps position
 int oldFlapsPos = -1;
 
@@ -483,10 +479,10 @@ void handleSwitchesAndLEDs() {
       lastAct = currentTime;
 
       if (newGear) {
-        gp.pressButton(buttonGear);
+        Serial.printf("controls.gearDown(-1);\n");
         if (oldGear != -1) tone(PIN_SPEAKER, 54, 85);
       } else {
-        gp.releaseButton(buttonGear);
+        Serial.printf("controls.gearDown(1);\n");
         if (oldGear != -1) tone(PIN_SPEAKER, 42, 85);
       }
 
@@ -498,10 +494,10 @@ void handleSwitchesAndLEDs() {
       lastAct = currentTime;
 
       if (newUnits) {
-        gp.releaseButton(buttonUnits);
+        Serial.printf("setprop('it-autoflight/config/altitude-dial-mode', 0);\n");
         if (oldUnits != -1) tone(PIN_SPEAKER, 1500, 8);
       } else {
-        gp.pressButton(buttonUnits);
+        Serial.printf("setprop('it-autoflight/config/altitude-dial-mode', 1);\n");
         if (oldUnits != -1) tone(PIN_SPEAKER, 1650, 8);
       }
 
