@@ -138,6 +138,8 @@ int oldFlapsPos = -1;
 bool ktsMachMode = false;
 bool trkFpaMode = false;
 bool unitsMode = false;
+bool spdDashes = false;
+bool hdgDashes = false;
 bool vsDashes = true;
 bool warnBlink = false;
 
@@ -485,7 +487,6 @@ void handleSwitchesAndLEDs() {
         Serial.printf("controls.gearDown(1);\n");
         if (oldGear != -1) tone(PIN_SPEAKER, 42, 85);
       }
-
       oldGear = newGear;
     }
 
@@ -599,14 +600,14 @@ void handleResistorLadders() {
 
       // Handle speed mode change
       if (newRL2 == 3) {
-        ktsMachMode = !ktsMachMode;
+        ktsMachMode = ! ktsMachMode;
         encoderSPDPos = dontSendSPD;
         encoderSPD.setPosition(100);
       }
 
       // Handle TRK/FPA mode change
       if (newRL2 == 6) {
-        trkFpaMode = !trkFpaMode;
+        trkFpaMode = ! trkFpaMode;
         encoderHDGPos = dontSendHDG;
         encoderVSPos = dontSendVS;
         vsDashes = true;
@@ -637,7 +638,7 @@ void handleResistorLadders() {
           // Send nasal command
           Serial.printf("view.setViewByIndex(0);view.resetViewDir();view.resetFOV();view.increase(20);\n");
         }
-        viewMode = !viewMode;
+        viewMode = ! viewMode;
         digitalWrite(PIN_VIEW, viewMode);
         lastViewPress = currentTime;
       }
@@ -705,12 +706,24 @@ void handleEncoders() {
     display.setCursor(0, 0);
     if (ktsMachMode) {
       display.printf("MACH");
-      writeDigit(display, 55, 2, 0, WHITE);
-      display.fillRoundRect(71, 28, 4, 4, 2, WHITE);  // .
-      writeDigits(display, 75, 2, 19, (newSPDPos), WHITE, true);
     } else {
       display.printf("SPD");
-      writeDigits(display, 48, 3, 19, (newSPDPos), WHITE, false);
+    }
+    if (spdDashes) {
+      // dashes for managed mode
+      writeDigit(display, 54, 3, 10, WHITE);
+      writeDigit(display, 73, 3, 10, WHITE);
+      writeDigit(display, 92, 3, 10, WHITE);
+      // managed dot
+      display.fillCircle(120, 24, 7, WHITE);
+    } else {
+      if (ktsMachMode) {
+        writeDigit(display, 55, 2, 0, WHITE);
+        display.fillRoundRect(71, 28, 4, 4, 2, WHITE);  // .
+        writeDigits(display, 75, 2, 19, (newSPDPos), WHITE, true);
+      } else {
+        writeDigits(display, 48, 3, 19, (newSPDPos), WHITE, false);
+      }
     }
     display.display();
 
@@ -754,7 +767,20 @@ void handleEncoders() {
     } else {
       display.printf("HDG");
     }
-    writeDigits(display, 48, 3, 19, newHDGPos, WHITE, true);
+    if (hdgDashes) {
+      // dashes for managed mode
+      writeDigit(display, 38, 3, 10, WHITE);
+      writeDigit(display, 57, 3, 10, WHITE);
+      writeDigit(display, 76, 3, 10, WHITE);
+      // managed dot
+      display.fillCircle(114, 24, 7, WHITE);
+      // smooshed text LAT
+      display.drawChar(98, 0, 76, WHITE, BLACK, 2);
+      display.drawChar(107, 0, 65, WHITE, BLACK, 2);
+      display.drawChar(118, 0, 84, WHITE, BLACK, 2);
+    } else {
+      writeDigits(display, 48, 3, 19, newHDGPos, WHITE, true);
+    }
     display.display();
 
     // Send nasal commands
@@ -978,13 +1004,15 @@ void processField(int field, char* value) {
   //   7: MASTER CAUTION (bool)
   //   8: KTS/MACH mode (bool, 0=knots)
   //   9: HDG/TRK mode (bool, 0=HDG)
-  //  10: VERT display (int, 1=VS, 5=FPA, else dashes)
-  //  11: ALT (int)
-  //  12: HDG (int)
-  //  13: SPD KTS (int)
-  //  14: SPD MACH (float)
-  //  15: VS (string, e.g., "+60")
-  //  16: FPA (float)
+  //  10: SPD managed (bool)
+  //  11: HDG managed (bool)
+  //  12: VERT display (int, 1=VS, 5=FPA, else dashes)
+  //  13: ALT (int)
+  //  14: HDG (int)
+  //  15: SPD KTS (int)
+  //  16: SPD MACH (float)
+  //  17: VS (string, e.g., "+60")
+  //  18: FPA (float)
 
   // LED indicators
   if (field == 0) digitalWrite(PIN_AP1, atoi(value));
@@ -1006,7 +1034,15 @@ void processField(int field, char* value) {
     encoderHDGPos = dontSendHDG;
     encoderVSPos = dontSendVS;
   }
-  if (field == 10) {
+  if (field == 10 && atoi(value) != (int)spdDashes) {
+    spdDashes = (bool)atoi(value);
+    encoderSPDPos = dontSendSPD;
+  }
+  if (field == 11 && atoi(value) != (int)hdgDashes) {
+    hdgDashes = (bool)atoi(value);
+    encoderHDGPos = dontSendHDG;
+  }
+  if (field == 12) {
     if (atoi(value) == 1 || atoi(value) == 5) {
       if (vsDashes) {
         vsDashes = false;
@@ -1022,33 +1058,33 @@ void processField(int field, char* value) {
 
   // Encoder display updates only after activity has settled
   if (currentTime > lastAct + 333) {  // 3 Hz
-    if (field == 11 && atoi(value) / 100 != encoderALTPos) {
+    if (field == 13 && atoi(value) / 100 != encoderALTPos) {
       encoderALT.setPosition(atoi(value) / 100);
       encoderALTPos = dontSendALT;
     }
-    if (field == 12 && atoi(value) != encoderHDGPos) {
+    if (field == 14 && atoi(value) != encoderHDGPos) {
       encoderHDG.setPosition(atoi(value));
       encoderHDGPos = dontSendHDG;
     }
     if (ktsMachMode) {
-      if (field == 14 && (int)(atof(value) * 1000) != encoderSPDPos) {
+      if (field == 16 && (int)(atof(value) * 1000) != encoderSPDPos) {
         encoderSPD.setPosition((int)(atof(value) * 1000));
         encoderSPDPos = dontSendSPD;
       }
     } else {
-      if (field == 13 && atoi(value) != encoderSPDPos) {
+      if (field == 15 && atoi(value) != encoderSPDPos) {
         encoderSPD.setPosition(atoi(value));
         encoderSPDPos = dontSendSPD;
       }
     }
     if (! vsDashes) {
       if (trkFpaMode) {
-        if (field == 16 && (int)(atof(value) * 10) != encoderVSPos) {
+        if (field == 18 && (int)(atof(value) * 10) != encoderVSPos) {
           encoderVS.setPosition((int)(atof(value) * 10));
           encoderVSPos = dontSendVS;
         }
       } else {
-        if (field == 15 && atoi(value) != encoderVSPos) {
+        if (field == 17 && atoi(value) != encoderVSPos) {
           encoderVS.setPosition(atoi(value));
           encoderVSPos = dontSendVS;
         }

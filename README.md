@@ -17,7 +17,8 @@ It bridges the physical and digital worlds, allowing users to get hands-on with 
 The controller uses a hybrid approach to interface with the FlightGear simulator, combining low-latency USB HID inputs with bi-directional serial communication for complex data.
 
 * The device appears to the host computer as both a standard USB HID Gamepad for sticks and buttons and a USB Serial device  for data exchange.
-* The A320 FCU features dedicated rotary encoder knobs for speed/mach, heading/track, altitude, and vertical speed/FPA with each mechanically implementing push/pull functionality to manage autopilot modes.
+* The A320 FCU features dedicated rotary encoder knobs for speed/mach, heading/track, altitude, and vertical speed/FPA.
+* Each knobs mechanically implements the push/pull functionality used to switch between manually-selected and FMGC-managed autopilot modes.
 * Five distinct OLED screens provide real-time feedback from the simulator, showing current flight parameters like target altitude, heading and speed synced via a custom serial protocol.
 * The physical controls include analog joysticks for flight control, joystick view mode for panning and zooming the main simulator canvas, a dedicated flaps lever with detents, a landing gear switch, and various autopilot engagement buttons.
 * Visual and audio feedback features include master warning and caution indicators and a built-in speaker for clicks and alert sounds providing immediate sensory feedback.

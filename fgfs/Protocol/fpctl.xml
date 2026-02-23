@@ -18,13 +18,15 @@ Fields:
     7: MASTER CAUTION (bool)
     8: KTS/MACH mode (bool, 0=knots)
     9: HDG/TRK mode (bool, 0=HDG)
-   10: VERT display (int, 1=VS, 5=FPA, else dashes)
-   11: ALT (int)
-   12: HDG (int)
-   13: SPD KTS (int)
-   14: SPD MACH (float)
-   15: VS (string, e.g., "+60")
-   16: FPA (float)
+   10: SPD managed (bool)
+   11: HDG managed (bool)
+   12: VERT display (int, 1=VS, 5=FPA, else dashes)
+   13: ALT (int)
+   14: HDG (int)
+   15: SPD KTS (int)
+   16: SPD MACH (float)
+   17: VS (string, e.g., "+60")
+   18: FPA (float)
 
 -->
 <PropertyList>
@@ -81,6 +83,16 @@ Fields:
         <name>HDG/TRK mode</name>
         <format>%d</format>
         <node>/it-autoflight/input/trk</node>
+      </chunk>
+      <chunk>
+        <name>SPD managed</name>
+        <format>%d</format>
+        <node>/controls/indicators/fcu-spd-dash</node>
+      </chunk>
+      <chunk>
+        <name>HDG managed</name>
+        <format>%d</format>
+        <node>/controls/indicators/fcu-lat-dash</node>
       </chunk>
       <chunk>
         <name>VERT mode</name>
