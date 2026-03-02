@@ -45,17 +45,19 @@ Buttons:
   <name type="string">Espressif Systems ESP32_S3_USB_OTG</name>
   <nasal>
     <script><![CDATA[
-    print("joystick v34");
+    print("Loading fpctl joystick input driver");
     var timerViewDir = maketimer(0.05, func() {
       var js3 = getprop("input/joysticks/js[0]/axis[3]/binding/setting");
       if (js3 != nil and js3 != 0) {
-        view.panViewDir(-js3*2);
+        js3 = -2*js3*abs(js3);
+        view.panViewDir(js3);
       }
     });
     var timerViewPitch = maketimer(0.05, func() {
       var js4 = getprop("input/joysticks/js[0]/axis[4]/binding/setting");
       if (js4 != nil and js4 != 0) {
-        view.panViewPitch(-js4*2);
+        js4 = -2*js4*abs(js4);
+        view.panViewPitch(js4);
       }
     });
     timerViewDir.start();
