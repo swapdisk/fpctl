@@ -139,7 +139,9 @@ bool ktsMachMode = false;
 bool trkFpaMode = false;
 bool unitsMode = false;
 bool spdDashes = false;
+bool spdDot = false;
 bool hdgDashes = false;
+bool hdgDot = false;
 bool vsDashes = true;
 bool warnBlink = false;
 
@@ -660,7 +662,10 @@ void handleResistorLadders() {
 
 // Tick rotary encoders
 void handleEncoders() {
-  // Ticks unthrottled for precision
+  // Bail out if any knob pushed or pulled 
+  if (oldRL1 != 0) return;
+
+  // Detect encoder state changes
   encoderSPD.tick();
   encoderHDG.tick();
   encoderALT.tick();
@@ -709,18 +714,30 @@ void handleEncoders() {
     } else {
       display.printf("SPD");
     }
+    if (spdDot) {
+      // managed dot
+      display.fillCircle(120, 24, 7, WHITE);
+    }
     if (spdDashes) {
       // dashes for managed mode
       writeDigit(display, 54, 3, 10, WHITE);
       writeDigit(display, 73, 3, 10, WHITE);
       writeDigit(display, 92, 3, 10, WHITE);
-      // managed dot
-      display.fillCircle(120, 24, 7, WHITE);
     } else {
       if (ktsMachMode) {
-        writeDigit(display, 55, 2, 0, WHITE);
-        display.fillRoundRect(71, 28, 4, 4, 2, WHITE);  // .
-        writeDigits(display, 75, 2, 19, (newSPDPos), WHITE, true);
+        if (spdDot) {
+          // clear "MACH" and abbreviate
+          display.fillRect(0, 0, 48, 14, BLACK);
+          display.setCursor(0, 0);
+          display.printf("M.");
+          writeDigit(display, 33, 2, 0, WHITE);
+          display.fillRoundRect(49, 28, 4, 4, 2, WHITE);  // .
+          writeDigits(display, 53, 2, 19, (newSPDPos), WHITE, true);
+        } else {
+          writeDigit(display, 55, 2, 0, WHITE);
+          display.fillRoundRect(71, 28, 4, 4, 2, WHITE);  // .
+          writeDigits(display, 75, 2, 19, (newSPDPos), WHITE, true);
+        }
       } else {
         writeDigits(display, 48, 3, 19, (newSPDPos), WHITE, false);
       }
@@ -767,19 +784,25 @@ void handleEncoders() {
     } else {
       display.printf("HDG");
     }
-    if (hdgDashes) {
-      // dashes for managed mode
-      writeDigit(display, 38, 3, 10, WHITE);
-      writeDigit(display, 57, 3, 10, WHITE);
-      writeDigit(display, 76, 3, 10, WHITE);
+    if (hdgDot) {
       // managed dot
       display.fillCircle(114, 24, 7, WHITE);
       // smooshed text LAT
       display.drawChar(98, 0, 76, WHITE, BLACK, 2);
       display.drawChar(107, 0, 65, WHITE, BLACK, 2);
       display.drawChar(118, 0, 84, WHITE, BLACK, 2);
+    }
+    if (hdgDashes) {
+      // dashes for managed mode
+      writeDigit(display, 38, 3, 10, WHITE);
+      writeDigit(display, 57, 3, 10, WHITE);
+      writeDigit(display, 76, 3, 10, WHITE);
     } else {
-      writeDigits(display, 48, 3, 19, newHDGPos, WHITE, true);
+      if (hdgDot) {
+        writeDigits(display, 39, 3, 19, newHDGPos, WHITE, true);
+      } else {
+        writeDigits(display, 48, 3, 19, newHDGPos, WHITE, true);
+      }
     }
     display.display();
 
@@ -1004,15 +1027,17 @@ void processField(int field, char* value) {
   //   7: MASTER CAUTION (bool)
   //   8: KTS/MACH mode (bool, 0=knots)
   //   9: HDG/TRK mode (bool, 0=HDG)
-  //  10: SPD managed (bool)
-  //  11: HDG managed (bool)
-  //  12: VERT display (int, 1=VS, 5=FPA, else dashes)
-  //  13: ALT (int)
-  //  14: HDG (int)
-  //  15: SPD KTS (int)
-  //  16: SPD MACH (float)
-  //  17: VS (string, e.g., "+60")
-  //  18: FPA (float)
+  //  10: SPD dashes (bool)
+  //  11: SPD managed dot (bool)
+  //  12: HDG dashes (bool)
+  //  13: HDG managed dot (bool)
+  //  14: VERT display (int, 1=VS, 5=FPA, else dashes)
+  //  15: ALT (int)
+  //  16: HDG (int)
+  //  17: SPD KTS (int)
+  //  18: SPD MACH (float)
+  //  19: VS (string, e.g., "+60")
+  //  20: FPA (float)
 
   // LED indicators
   if (field == 0) digitalWrite(PIN_AP1, atoi(value));
@@ -1038,11 +1063,19 @@ void processField(int field, char* value) {
     spdDashes = (bool)atoi(value);
     encoderSPDPos = dontSendSPD;
   }
-  if (field == 11 && atoi(value) != (int)hdgDashes) {
+  if (field == 11 && atoi(value) != (int)spdDot) {
+    spdDot = (bool)atoi(value);
+    encoderSPDPos = dontSendSPD;
+  }
+  if (field == 12 && atoi(value) != (int)hdgDashes) {
     hdgDashes = (bool)atoi(value);
     encoderHDGPos = dontSendHDG;
   }
-  if (field == 12) {
+  if (field == 13 && atoi(value) != (int)hdgDot) {
+    hdgDot = (bool)atoi(value);
+    encoderHDGPos = dontSendHDG;
+  }
+  if (field == 14) {
     if (atoi(value) == 1 || atoi(value) == 5) {
       if (vsDashes) {
         vsDashes = false;
@@ -1058,33 +1091,33 @@ void processField(int field, char* value) {
 
   // Encoder display updates only after activity has settled
   if (currentTime > lastAct + 333) {  // 3 Hz
-    if (field == 13 && atoi(value) / 100 != encoderALTPos) {
+    if (field == 15 && atoi(value) / 100 != encoderALTPos) {
       encoderALT.setPosition(atoi(value) / 100);
       encoderALTPos = dontSendALT;
     }
-    if (field == 14 && atoi(value) != encoderHDGPos) {
+    if (field == 16 && atoi(value) != encoderHDGPos) {
       encoderHDG.setPosition(atoi(value));
       encoderHDGPos = dontSendHDG;
     }
     if (ktsMachMode) {
-      if (field == 16 && (int)(atof(value) * 1000) != encoderSPDPos) {
+      if (field == 18 && (int)(atof(value) * 1000) != encoderSPDPos) {
         encoderSPD.setPosition((int)(atof(value) * 1000));
         encoderSPDPos = dontSendSPD;
       }
     } else {
-      if (field == 15 && atoi(value) != encoderSPDPos) {
+      if (field == 17 && atoi(value) != encoderSPDPos) {
         encoderSPD.setPosition(atoi(value));
         encoderSPDPos = dontSendSPD;
       }
     }
     if (! vsDashes) {
       if (trkFpaMode) {
-        if (field == 18 && (int)(atof(value) * 10) != encoderVSPos) {
+        if (field == 20 && (int)(atof(value) * 10) != encoderVSPos) {
           encoderVS.setPosition((int)(atof(value) * 10));
           encoderVSPos = dontSendVS;
         }
       } else {
-        if (field == 17 && atoi(value) != encoderVSPos) {
+        if (field == 19 && atoi(value) != encoderVSPos) {
           encoderVS.setPosition(atoi(value));
           encoderVSPos = dontSendVS;
         }
