@@ -70,6 +70,6 @@ This project was made possible by the inspiration and contributions of many. Tha
 * Josh Davidson, et al, for the very advanced [Airbus A320 Family](https://github.com/legoboyvdlp/A320-family) simulation for FlightGear
 * Matthias Hertel's top notch [RotaryEncoder Arduino Library](https://github.com/mathertel/RotaryEncoder)
 * Limor Fried and Adafruit Industries for their [Adafruit_SSD1306](https://github.com/adafruit/Adafruit_SSD1306/) OLED display library
-* Chris Stone at Ignorant of Things for clearly explaining the right way to do [resister ladders](https://ignorantofthings.com/pushing-adc-limits-with-the-perfect-multi-button-input-resistor-ladder/)
+* Chris Stone at Ignorant of Things for clearly explaining the right way to do [resistor ladders](https://ignorantofthings.com/pushing-adc-limits-with-the-perfect-multi-button-input-resistor-ladder/)
 * Darren Embry's beautifully crafted [Routed Gothic Font](https://github.com/dse/routed-gothic)
 * Red Hat for sharing their commercial-grade [typefaces](https://github.com/RedHatOfficial/RedHatFont) with open source licensing

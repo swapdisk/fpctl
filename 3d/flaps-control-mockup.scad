@@ -1,4 +1,4 @@
-// Victum of the include scad with module bug?
+// Victim of the include scad with module bug?
 // import stl vs. include fixed it
 
 $fn=180;

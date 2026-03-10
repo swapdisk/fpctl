@@ -40,7 +40,7 @@ difference() {
     // subtract bottom
     translate([-49, -49, -99]) cube(99);
     
-    // subtract joystick aperature
+    // subtract joystick aperture
     translate([0, 0, -dome_y]) 
         linear_extrude(height=dome_rad+dome_thick, scale=26) hull() {
         translate([jsa_xy/2, jsa_xy/2, 0]) circle(jsa_rad);
@@ -54,7 +54,7 @@ difference() {
 //    //rotate([0, 0, 45]) translate([0, -99, -eps]) cube(99);
 }
 
-// Debug aperature size
+// Debug aperture size
 //o_xy=20.32;
 //translate([-o_xy/2, -o_xy/2, 0]) cube([o_xy, o_xy, 20]);
 

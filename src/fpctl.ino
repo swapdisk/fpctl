@@ -339,7 +339,7 @@ void setup() {
   pinMode(PIN_GEAR, INPUT_PULLUP);
   pinMode(PIN_UNITS, INPUT_PULLUP);
 
-  // Set up input pins for resitor ladders
+  // Set up input pins for resistor ladders
   pinMode(PIN_RL1, INPUT);
   pinMode(PIN_RL2, INPUT);
   pinMode(PIN_RL3, INPUT);
