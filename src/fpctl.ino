@@ -127,6 +127,17 @@ unsigned long dispOffMillis = 1200000;  // 20 minutes
 const int potMillis = 100;
 unsigned long whenPot = 0;
 
+// Rolling average configuration for view mode damping
+const int VIEW_AVG_WINDOW = 6;           // Number of samples in moving average (higher = smoother)
+const float VIEW_DAMPING_FACTOR = 0.9;   // Additional damping 0.0-1.0 (higher = more damping)
+
+// Rolling average buffers for view mode joystick
+int viewAxisXBuffer[VIEW_AVG_WINDOW] = {0};
+int viewAxisYBuffer[VIEW_AVG_WINDOW] = {0};
+int viewBufferIndex = 0;
+int smoothedViewX = 0;
+int smoothedViewY = 0;
+
 // Stateful switch vars
 int oldGear = -1;
 int oldUnits = -1;
@@ -208,6 +219,24 @@ int scaleAxis(uint8_t pin) {
 
   // Convert 12-bit ADC to 8-bit HID gamepad axis
   return (reading / 16) - 128;
+}
+
+// Apply rolling average with damping for smooth view panning
+int smoothViewAxis(int* buffer, int newValue, int* smoothed) {
+  // Add new value to circular buffer
+  buffer[viewBufferIndex] = newValue;
+
+  // Calculate simple moving average
+  int sum = 0;
+  for (int i = 0; i < VIEW_AVG_WINDOW; i++) {
+    sum += buffer[i];
+  }
+  int avg = sum / VIEW_AVG_WINDOW;
+
+  // Apply exponential smoothing for additional damping
+  *smoothed = (int)(avg * (1.0 - VIEW_DAMPING_FACTOR) + *smoothed * VIEW_DAMPING_FACTOR);
+
+  return *smoothed;
 }
 
 // Flaps potentiometer magic numbers
@@ -523,8 +552,16 @@ void handleAnalogControls() {
   if (currentTime - whenPot > potMillis) {
     // Read joysticks and send axis events
     if (viewMode) {
-      gp.leftTrigger(scaleAxis(PIN_JS0X));
-      gp.rightTrigger(scaleAxis(PIN_JS0Y));
+      // Apply rolling average damping for smooth view panning
+      int rawX = scaleAxis(PIN_JS0X);
+      int rawY = scaleAxis(PIN_JS0Y);
+      int smoothX = smoothViewAxis(viewAxisXBuffer, rawX, &smoothedViewX);
+      int smoothY = smoothViewAxis(viewAxisYBuffer, rawY, &smoothedViewY);
+      gp.leftTrigger(smoothX);
+      gp.rightTrigger(smoothY);
+
+      // Increment buffer index for both axes
+      viewBufferIndex = (viewBufferIndex + 1) % VIEW_AVG_WINDOW;
     } else {
       gp.leftStick(scaleAxis(PIN_JS0X), scaleAxis(PIN_JS0Y));
     }
