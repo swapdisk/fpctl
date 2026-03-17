@@ -124,13 +124,13 @@ Fields:
       <chunk>
         <name>SPD KTS</name>
         <format>%d</format>
-        <node>/it-autoflight/input/kts</node>
+        <node>/it-autoflight/input/kts-display</node>
       </chunk>
       <chunk>
         <name>SPD MACH</name>
         <type>float</type>
         <format>%f</format>
-        <node>/it-autoflight/input/mach</node>
+        <node>/it-autoflight/input/mach-display</node>
       </chunk>
       <chunk>
         <name>VS</name>
