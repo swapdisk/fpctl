@@ -324,7 +324,7 @@ Buttons:
     </binding>
     <binding>
             <command>nasal</command>
-            <script>libraries.pushbutton();</script>
+            <script>core.pushbutton();</script>
     </binding>
     <mod-up>
             <binding>
