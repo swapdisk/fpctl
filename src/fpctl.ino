@@ -128,8 +128,10 @@ const int potMillis = 100;
 unsigned long whenPot = 0;
 
 // Rolling average configuration for view mode damping
-const int VIEW_AVG_WINDOW = 6;           // Number of samples in moving average (higher = smoother)
-const float VIEW_DAMPING_FACTOR = 0.9;   // Additional damping 0.0-1.0 (higher = more damping)
+// Number of samples in moving average (higher is smoother, but laggier)
+const int VIEW_AVG_WINDOW = 4;
+// Additional damping 0.0-0.9 (higher for more damping)
+const float VIEW_DAMPING_FACTOR = 0.8;
 
 // Rolling average buffers for view mode joystick
 int viewAxisXBuffer[VIEW_AVG_WINDOW] = {0};
@@ -154,6 +156,7 @@ bool spdDot = false;
 bool hdgDashes = false;
 bool hdgDot = false;
 bool vsDashes = true;
+bool vsDot = false;
 bool warnBlink = false;
 
 // Internal modes
@@ -945,11 +948,15 @@ void handleEncoders() {
     display.clearDisplay();
     display.setTextSize(2);
     display.setTextColor(WHITE);
-    display.setCursor(0, 0);
+    display.setCursor(3, 0);
     if (trkFpaMode) {
       display.printf("FPA");
     } else {
       display.printf("V/S");
+    }
+    if (vsDot) {
+      // managed dot
+      display.fillCircle(7, 24, 7, WHITE);
     }
     if (vsDashes) {
       // dashes for leveled off display
@@ -969,9 +976,9 @@ void handleEncoders() {
         writeDigit(display, 78, 2, abs(newVSPos) % 10, WHITE);
       } else {
         if (newVSPos < 0) {
-          writeDigit(display, 37, 3, 10, WHITE);  // -
+          writeDigit(display, 38, 3, 10, WHITE);  // -
         } else {
-          writeDigit(display, 37, 3, 11, WHITE);  // +
+          writeDigit(display, 38, 3, 11, WHITE);  // +
         }
         writeDigit(display, 56, 3, abs(newVSPos) / 10, WHITE);
         writeDigit(display, 75, 3, abs(newVSPos) % 10, WHITE);
@@ -1124,6 +1131,10 @@ void processField(int field, char* value) {
         encoderVSPos = dontSendVS;
       }
     }
+  }
+  if (field == 21 && atoi(value) != (int)vsDot) {
+    vsDot = (bool)atoi(value);
+    encoderVSPos = dontSendVS;
   }
 
   // Encoder display updates only after activity has settled

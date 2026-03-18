@@ -29,6 +29,7 @@ Fields:
    18: SPD MACH (float)
    19: VS (string, e.g., "+60")
    20: FPA (float)
+   21: ALT managed dot (bool)
 
 -->
 <PropertyList>
@@ -143,6 +144,11 @@ Fields:
         <type>float</type>
         <format>%f</format>
         <node>/it-autoflight/input/fpa</node>
+      </chunk>
+      <chunk>
+        <name>ALT managed dot</name>
+        <format>%d</format>
+        <node>/controls/indicators/fcu-alt-mgt</node>
       </chunk>
     </output>
   </generic>
