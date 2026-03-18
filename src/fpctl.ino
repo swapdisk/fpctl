@@ -1082,6 +1082,7 @@ void processField(int field, char* value) {
   //  18: SPD MACH (float)
   //  19: VS (string, e.g., "+60")
   //  20: FPA (float)
+  //  21: ALT managed dot (bool)
 
   // LED indicators
   if (field == 0) digitalWrite(PIN_AP1, atoi(value));
