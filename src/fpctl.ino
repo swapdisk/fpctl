@@ -88,10 +88,10 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 // LatchMode::FOUR3 is 4 steps per latch or 24 steps per turn
 // LatchMode::TWO03 is 2 steps per latch or 48 steps per turn
 #include <RotaryEncoder.h>
-RotaryEncoder encoderSPD(PIN_ENC1A, PIN_ENC1B, RotaryEncoder::LatchMode::TWO03);
-RotaryEncoder encoderHDG(PIN_ENC2A, PIN_ENC2B, RotaryEncoder::LatchMode::TWO03);
-RotaryEncoder encoderALT(PIN_ENC3A, PIN_ENC3B, RotaryEncoder::LatchMode::TWO03);
-RotaryEncoder encoderVS(PIN_ENC4A, PIN_ENC4B, RotaryEncoder::LatchMode::TWO03);
+RotaryEncoder encoderSPD(PIN_ENC1A, PIN_ENC1B, RotaryEncoder::LatchMode::FOUR3);
+RotaryEncoder encoderHDG(PIN_ENC2A, PIN_ENC2B, RotaryEncoder::LatchMode::FOUR3);
+RotaryEncoder encoderALT(PIN_ENC3A, PIN_ENC3B, RotaryEncoder::LatchMode::FOUR3);
+RotaryEncoder encoderVS(PIN_ENC4A, PIN_ENC4B, RotaryEncoder::LatchMode::FOUR3);
 RotaryEncoder encoderTrim(PIN_ENC5A, PIN_ENC5B, RotaryEncoder::LatchMode::TWO03);
 
 // Magic encoder values to force display update while not sending nasal command
@@ -721,6 +721,17 @@ void handleEncoders() {
 
   // Handle SPD encoder if changed
   if (encoderSPDPos != newSPDPos) {
+    // Knob acceleration
+    if (currentTime - lastAct < 60) {
+      if (newSPDPos - encoderSPDPos == 1) {
+        newSPDPos++;
+        encoderSPD.setPosition(newSPDPos);
+      }
+      if (newSPDPos - encoderSPDPos == -1) {
+        newSPDPos--;
+        encoderSPD.setPosition(newSPDPos);
+      }
+    }
     lastAct = currentTime;
 
     // SPD control limits
@@ -799,6 +810,17 @@ void handleEncoders() {
 
   // Handle HDG encoder if changed
   if (encoderHDGPos != newHDGPos) {
+    // Knob acceleration
+    if (currentTime - lastAct < 60) {
+      if (newHDGPos - encoderHDGPos == 1) {
+        newHDGPos++;
+        encoderHDG.setPosition(newHDGPos);
+      }
+      if (newHDGPos - encoderHDGPos == -1) {
+        newHDGPos--;
+        encoderHDG.setPosition(newHDGPos);
+      }
+    }
     lastAct = currentTime;
 
     // HDG control limits
@@ -861,6 +883,17 @@ void handleEncoders() {
 
   // Handle ALT encoder if changed
   if (encoderALTPos != newALTPos) {
+    // Knob acceleration (100's mode only)
+    if (unitsMode && currentTime - lastAct < 60) {
+      if (newALTPos - encoderALTPos == 1) {
+        newALTPos++;
+        encoderALT.setPosition(newALTPos);
+      }
+      if (newALTPos - encoderALTPos == -1) {
+        newALTPos--;
+        encoderALT.setPosition(newALTPos);
+      }
+    }
     lastAct = currentTime;
 
     // Factor units knob
@@ -1082,7 +1115,6 @@ void processField(int field, char* value) {
   //  18: SPD MACH (float)
   //  19: VS (string, e.g., "+60")
   //  20: FPA (float)
-  //  21: ALT managed dot (bool)
 
   // LED indicators
   if (field == 0) digitalWrite(PIN_AP1, atoi(value));
@@ -1229,7 +1261,8 @@ void handlePeriodicUpdates() {
       } else {
         display.setCursor(0, 18);
       }
-      display.printf("L/S %d\n", loopCount - loopDiff);
+      // display.printf("L/S %d\n", loopCount - loopDiff);
+      display.printf("ACT %d\n", currentTime - lastAct);
     }
 
     // Send to display. This function blocks for 13 ms.
