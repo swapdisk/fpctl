@@ -799,8 +799,10 @@ void handleEncoders() {
     if (encoderSPDPos != dontSendSPD) {
       if (encoderSPDPos < newSPDPos) {
         Serial.printf("fcu.FCUController.SPDAdjust(1);\n");
+        if ( newSPDPos - encoderSPDPos == 2) Serial.printf("fcu.FCUController.SPDAdjust(1);\n");
       } else {
         Serial.printf("fcu.FCUController.SPDAdjust(-1);\n");
+        if ( newSPDPos - encoderSPDPos == -2) Serial.printf("fcu.FCUController.SPDAdjust(-1);\n");
       }
       click();
     }
@@ -872,8 +874,10 @@ void handleEncoders() {
     if (encoderHDGPos != dontSendHDG) {
       if (encoderHDGPos < newHDGPos) {
         Serial.printf("fcu.FCUController.HDGAdjust(1);\n");
+        if ( newHDGPos - encoderHDGPos == 2) Serial.printf("fcu.FCUController.HDGAdjust(1);\n");
       } else {
         Serial.printf("fcu.FCUController.HDGAdjust(-1);\n");
+        if ( newHDGPos - encoderHDGPos == -2) Serial.printf("fcu.FCUController.HDGAdjust(-1);\n");
       }
       click();
     }
@@ -931,12 +935,14 @@ void handleEncoders() {
       if (encoderALTPos < newALTPos) {
         if (unitsMode) {
           Serial.printf("fcu.FCUController.ALTAdjust(1);\n");
+          if ( newALTPos - encoderALTPos == 2) Serial.printf("fcu.FCUController.ALTAdjust(1);\n");
         } else {
           Serial.printf("fcu.FCUController.ALTAdjust(10);\n");
         }
       } else {
         if (unitsMode) {
           Serial.printf("fcu.FCUController.ALTAdjust(-1);\n");
+          if ( newALTPos - encoderALTPos == -2) Serial.printf("fcu.FCUController.ALTAdjust(-1);\n");
         } else {
           Serial.printf("fcu.FCUController.ALTAdjust(-10);\n");
         }
