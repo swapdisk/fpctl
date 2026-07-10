@@ -29,7 +29,7 @@ At its heart, the controller is powered by an ESP32 microcontroller. To manage t
 
 * Multiplexing is used to update the five SSD1306 OLED displays which share the same I2C address. A [PCA9548A I2C switch](https://www.nxp.com/docs/en/data-sheet/PCA9548A.pdf) is used to rapidly switch between them, allowing individual updates.
 * Input multiplexing is achieved using resistor ladders, allowing the dozens of buttons to be read using only three analog input pins, significantly reducing the total GPIO count required.
-* Five high-precision rotary encoders manage the autopilot knobs with push/pull capability physically implemented with a custom 3D-printed "floating hinge" mechanism.
+* Five high-precision rotary encoders manage the autopilot knobs with push/pull capability physically implemented with a custom 3D-printed "[floating hinge](FLIPPIES.md)" mechanism.
 * Analog inputs use potentiometers handle the joysticks and the flaps lever position.
 
 ## Software Architecture
